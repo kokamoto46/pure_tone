@@ -58,8 +58,14 @@ ax.plot(frequencies, levels, 'x--', color='blue', label='Standard Levels')
 if pure_tone_level >= -5:
     ax.plot(frequency, pure_tone_level, 'o', color='red', label='Test Level')
 
+# Setting the x-axis to only include the specified frequencies, equally spaced
+ax.set_xticks(frequencies)
+ax.set_xticklabels([str(f) + ' Hz' for f in frequencies])
+
+# Inverting the y-axis so that 110 dBHL is at the bottom and -20 dBHL is at the top
+ax.set_ylim(110, -20)
 ax.set_xlim(200, 4200)
-ax.set_ylim(-20, 110)
+
 ax.set_xlabel('Frequency (Hz)')
 ax.set_ylabel('Pure tone level (dBHL)')
 ax.set_title('Audiogram')
