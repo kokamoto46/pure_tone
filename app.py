@@ -10,16 +10,18 @@ import numpy as np
 # Title for the application
 st.title('Standard pure tone audiometry masking practice application')
 
+st.write("You will measure the right ear's air conductive hearing.")
+
 # Sidebar for the audiogram controls to keep the layout organized
 with st.sidebar:
     # Dropdown menu for selecting the frequency
     frequency = st.selectbox('Frequency to be measured', [250, 500, 1000, 2000, 4000])
 
     # Adjusting sliders based on the frequency selection
-    if frequency == 500:
-        max_level = 90
+    if frequency == 250:
+        max_level = 90  # Max level for 250 Hz
     else:
-        max_level = 110
+        max_level = 110  # Max level for other frequencies
 
     # Sliders for adjusting the pure tone level and masking noise level
     pure_tone_level = st.slider('Pure tone level (dBHL)', -5, max_level, step=5)
