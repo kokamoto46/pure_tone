@@ -5,6 +5,7 @@
 
 import streamlit as st
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Title for the application
 st.title('Standard pure tone audiometry masking practice application')
@@ -52,21 +53,21 @@ st.sidebar.success(response_message)
 fig, ax = plt.subplots()
 frequencies = [250, 500, 1000, 2000, 4000]
 levels = [35, 35, 30, 50, 60]
-ax.plot(frequencies, levels, 'x--', color='blue', label='Standard Levels')
 
-# Adding the "0" mark based on the pure tone level and selected frequency
+# Converting frequencies to a logarithmic scale for equal spacing
+log_freqs = np.log10(frequencies)
+
+ax.plot(log_freqs, levels, 'x--', color='blue', label='Standard Levels')
+
+# Adding the "0" mark based on the pure tone level and selected frequency, adjusting frequency to log scale
 if pure_tone_level >= -5:
-    ax.plot(frequency, pure_tone_level, 'o', color='red', label='Test Level')
+    ax.plot(np.log10(frequency), pure_tone_level, 'o', color='red', label='Test Level')
 
-# Setting the x-axis to only include the specified frequencies, equally spaced
-ax.set_xticks(frequencies)
-ax.set_xticklabels([str(f) + ' Hz' for f in frequencies])
+# Adjusting the x-axis to show the frequencies as labels but positioned at their logarithmic scale
+ax.set_xticks(log_freqs)
+ax.set_xticklabels([f"{f} Hz" for f in frequencies])
 
-# Inverting the y-axis so that 110 dBHL is at the bottom and -20 dBHL is at the top
 ax.set_ylim(110, -20)
-ax.set_xlim(200, 4200)
-
-ax.set_xlabel('Frequency (Hz)')
 ax.set_ylabel('Pure tone level (dBHL)')
 ax.set_title('Audiogram')
 ax.grid(True)
