@@ -10,7 +10,7 @@ import numpy as np
 # Title for the application
 st.title('Standard pure tone audiometry masking practice application')
 
-st.write("You will measure the right ear's air conductive hearing.")
+st.write("あなたは右耳の気導聴力を測定しようとしています")
 
 # Sidebar for the audiogram controls to keep the layout organized
 with st.sidebar:
@@ -59,7 +59,7 @@ st.sidebar.success(response_message)
 # Creating the audiogram diagram
 fig, ax = plt.subplots()
 frequencies = [0, 250, 500, 1000, 2000, 4000]
-levels = [35, 35, 30, 50, 60]
+levels = [35, 35, 30, 50, 60, 70]  # Adjusted to have the same number of elements as frequencies
 
 # Converting frequencies to a logarithmic scale for equal spacing
 log_freqs = np.log10(frequencies)
