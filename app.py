@@ -58,17 +58,21 @@ st.sidebar.success(response_message)
 
 # Creating the audiogram diagram
 fig, ax = plt.subplots()
-frequencies = [0, 250, 500, 1000, 2000, 4000]
-levels = [35, 35, 35, 30, 50, 60]
+# Removed 0 from frequencies since log10(0) is undefined
+frequencies = [250, 500, 1000, 2000, 4000]
+# Adjusted levels to match the updated frequencies list
+levels = [35, 35, 30, 50, 60]
 
 # Converting frequencies to a logarithmic scale for equal spacing
 log_freqs = np.log10(frequencies)
 
-ax.plot(log_freqs, levels, 'x--', color='blue', label='Standard Levels')
+ax.plot(log_freqs, levels, 'x--', color='blue', label='Left Ear')
 
 # Adding the "0" mark based on the pure tone level and selected frequency, adjusting frequency to log scale
 if pure_tone_level >= -5:
-    ax.plot(np.log10(frequency), pure_tone_level, 'o', color='red', label='Test Level')
+    # Ensure the frequency is not 0 before converting to log scale
+    if frequency > 0:
+        ax.plot(np.log10(frequency), pure_tone_level, 'o', color='red', label='Right Ear')
 
 # Adjusting the x-axis to show the frequencies as labels but positioned at their logarithmic scale
 ax.set_xticks(log_freqs)
