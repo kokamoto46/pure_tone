@@ -59,7 +59,7 @@ st.sidebar.success(response_message)
 # Creating the audiogram diagram
 fig, ax = plt.subplots()
 frequencies = [0, 250, 500, 1000, 2000, 4000]
-levels = [35, 35, 30, 50, 60, 70]  # Adjusted to have the same number of elements as frequencies
+levels = [35, 35, 35, 30, 50, 60]
 
 # Converting frequencies to a logarithmic scale for equal spacing
 log_freqs = np.log10(frequencies)
